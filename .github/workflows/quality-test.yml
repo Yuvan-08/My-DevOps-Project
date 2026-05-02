@@ -29,3 +29,18 @@ jobs:
           else
             echo "Security Check Passed: Code is clean and safe for production."
           fi
+          - name: Content & Spelling Check
+        run: |
+          echo "Checking for common presentation errors..."
+          # Example: Check if the word 'TODO' was left in the code
+          if grep -qi "TODO" index.html; then
+            echo "WARNING: You left a 'TODO' note in your code! Please clean it up."
+            exit 1
+          fi
+          
+          # Example: Check for a specific common spelling mistake (e.g., 'Recieve' instead of 'Receive')
+          if grep -qi "recieve" index.html; then
+            echo "SPELLING ERROR: Found 'recieve'. Please correct it to 'receive'."
+            exit 1
+          fi
+          echo "Content check passed!"
