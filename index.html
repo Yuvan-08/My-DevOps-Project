@@ -3,94 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yuvan | DevOps Command Center</title>
+    <title>Wanderlust Escapes | Premium Tour Packages</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Orbitron:wght@500;700&display=swap');
-        body { font-family: 'Fira Code', monospace; background-color: #050505; color: #00ffcc; overflow-x: hidden; }
-        .cyber-border { border: 1px solid #00ffcc; box-shadow: 0 0 10px rgba(0, 255, 204, 0.2); }
-        .glow-text { text-shadow: 0 0 8px rgba(0, 255, 204, 0.6); font-family: 'Orbitron', sans-serif; }
-        .pulse-dot { animation: pulse 2s infinite; }
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 204, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 255, 204, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 204, 0); }
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
+        body { font-family: 'Poppins', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        .hero-bg {
+            background-image: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
         }
+        .card-zoom:hover img { transform: scale(1.05); transition: transform 0.5s ease; }
     </style>
 </head>
-<body class="p-6 md:p-12 selection:bg-cyan-900 selection:text-white">
+<body class="antialiased">
 
-    <!-- Header -->
-    <header class="mb-12 border-b border-gray-800 pb-6 flex flex-col md:flex-row justify-between items-center">
-        <div>
-            <h1 class="text-4xl md:text-5xl font-bold glow-text text-white mb-2">S Yuvan Kumar</h1>
-            <p class="text-gray-400 text-sm">USN: 1DT23CS186 | Computer Science Engineering</p>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-emerald-600 flex items-center gap-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Wanderlust Escapes
+            </div>
+            <div class="hidden md:flex gap-6 font-semibold text-slate-600">
+                <a href="#" class="hover:text-emerald-600 transition">Destinations</a>
+                <a href="#" class="hover:text-emerald-600 transition">Corporate Packages</a>
+                <a href="#" class="hover:text-emerald-600 transition">About Us</a>
+            </div>
+            <button class="bg-emerald-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-emerald-700 transition shadow-md">Book Now</button>
         </div>
-        <div class="mt-4 md:mt-0 flex items-center gap-3 cyber-border px-4 py-2 rounded bg-gray-900">
-            <div class="w-3 h-3 bg-emerald-400 rounded-full pulse-dot"></div>
-            <span class="text-emerald-400 text-sm font-bold">PIPELINE: ACTIVE</span>
-        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-bg h-[60vh] flex flex-col justify-center items-center text-center px-6 text-white">
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 drop-shadow-lg">Discover the Unseen</h1>
+        <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8 font-light drop-shadow-md">
+            Enterprise-grade travel experiences curated for the modern explorer. From urban tech hubs to serene natural gateways.
+        </p>
     </header>
 
-    <div class="grid md:grid-cols-3 gap-8">
-        <!-- Main Content Area -->
-        <div class="md:col-span-2 space-y-8">
+    <!-- Tour Packages Section -->
+    <section class="py-20 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold mb-4 text-slate-800">Exclusive Domestic Routes</h2>
+            <p class="text-slate-500">Premium itineraries automatically deployed via CI/CD pipelines.</p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-10">
             
-            <!-- DevOps Architecture Section -->
-            <section class="cyber-border p-6 bg-gray-900/50 rounded-lg relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#00ffcc] to-transparent opacity-50"></div>
-                <h2 class="text-2xl glow-text text-white mb-4">🚀 Automated Deployment Architecture</h2>
-                <p class="text-gray-400 mb-4 text-sm leading-relaxed">
-                    This environment demonstrates a modern Continuous Integration & Continuous Deployment (CI/CD) workflow. Changes committed to the repository are automatically built, tested, and pushed to the edge network via GitHub Actions.
-                </p>
-                <div class="bg-black p-4 rounded border border-gray-800 font-mono text-sm text-gray-300">
-                    > Initiating build sequence... [OK]<br>
-                    > Packaging assets... [OK]<br>
-                    > Deploying to live server... <span class="text-emerald-400">[SUCCESS]</span>
+            <!-- Package 1: Bengaluru -->
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-zoom group border border-slate-100">
+                <div class="h-60 overflow-hidden relative">
+                    <span class="absolute top-4 right-4 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10">Best Seller</span>
+                    <img src="https://images.unsplash.com/photo-1596176530529-78163a4f7af2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Bengaluru" class="w-full h-full object-cover transition duration-500">
                 </div>
-            </section>
-
-            <!-- Leadership & Innovation -->
-            <section class="cyber-border p-6 bg-gray-900/50 rounded-lg">
-                <h2 class="text-2xl glow-text text-white mb-4">⚡ Campus Leadership & Innovation</h2>
-                <div class="border-l-2 border-[#00ffcc] pl-4 mb-4">
-                    <h3 class="text-xl font-bold text-white">EmpowerU - Founder & Club Lead</h3>
-                    <p class="text-gray-400 text-sm mt-2">
-                        Driving tech-entrepreneurship and innovation on campus. Lead organizer for national-level technical hackathons, securing corporate sponsorships, and mentoring student developers in cutting-edge tech.
+                <div class="p-6 border-t-4 border-emerald-500">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-2xl font-bold">The Bengaluru Escape</h3>
+                        <span class="font-semibold text-emerald-600">₹14,999</span>
+                    </div>
+                    <p class="text-slate-500 text-sm mb-4 leading-relaxed">
+                        Experience the perfect blend of lush green parks and high-tech corporate architecture in the Silicon Valley of India. Includes premium stay and guided city tours.
                     </p>
+                    <div class="flex items-center text-xs text-slate-400 gap-4 mb-6">
+                        <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"></path></svg> 3 Days</span>
+                        <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg> City & Tech</span>
+                    </div>
+                    <button class="w-full py-3 bg-slate-900 text-white rounded-xl font-semibold hover:bg-emerald-600 transition duration-300">View Itinerary</button>
                 </div>
-            </section>
+            </div>
+
+            <!-- Package 2: Kolkata -->
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-zoom group border border-slate-100">
+                <div class="h-60 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1558431382-27e303142255?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Kolkata" class="w-full h-full object-cover transition duration-500">
+                </div>
+                <div class="p-6 border-t-4 border-amber-500">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-2xl font-bold">Cultural Kolkata</h3>
+                        <span class="font-semibold text-amber-600">₹18,500</span>
+                    </div>
+                    <p class="text-slate-500 text-sm mb-4 leading-relaxed">
+                        A deep dive into the City of Joy. Walk through colonial architecture, cross the iconic Howrah Bridge, and experience unmatched culinary heritage.
+                    </p>
+                    <div class="flex items-center text-xs text-slate-400 gap-4 mb-6">
+                        <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"></path></svg> 4 Days</span>
+                        <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg> Heritage Walk</span>
+                    </div>
+                    <button class="w-full py-3 bg-slate-900 text-white rounded-xl font-semibold hover:bg-amber-500 transition duration-300">View Itinerary</button>
+                </div>
+            </div>
+
+            <!-- Package 3: Guwahati -->
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-zoom group border border-slate-100">
+                <div class="h-60 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Guwahati" class="w-full h-full object-cover transition duration-500">
+                </div>
+                <div class="p-6 border-t-4 border-blue-500">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-2xl font-bold">Guwahati Gateway</h3>
+                        <span class="font-semibold text-blue-600">₹22,000</span>
+                    </div>
+                    <p class="text-slate-500 text-sm mb-4 leading-relaxed">
+                        Journey to the Northeast. Experience the mighty Brahmaputra river, ancient temples, and breathtaking scenic flights into the heart of Assam.
+                    </p>
+                    <div class="flex items-center text-xs text-slate-400 gap-4 mb-6">
+                        <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"></path></svg> 5 Days</span>
+                        <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg> Nature & Rivers</span>
+                    </div>
+                    <button class="w-full py-3 bg-slate-900 text-white rounded-xl font-semibold hover:bg-blue-500 transition duration-300">View Itinerary</button>
+                </div>
+            </div>
 
         </div>
+    </section>
 
-        <!-- Sidebar -->
-        <div class="space-y-8">
-            <!-- Tech Stack -->
-            <section class="cyber-border p-6 bg-gray-900/50 rounded-lg">
-                <h2 class="text-xl glow-text text-white mb-4">🛠️ Tech Stack</h2>
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 bg-black border border-gray-700 rounded text-sm text-gray-300 hover:border-[#00ffcc] transition cursor-default">Python</span>
-                    <span class="px-3 py-1 bg-black border border-gray-700 rounded text-sm text-gray-300 hover:border-[#00ffcc] transition cursor-default">C/C++</span>
-                    <span class="px-3 py-1 bg-black border border-gray-700 rounded text-sm text-gray-300 hover:border-[#00ffcc] transition cursor-default">SQL</span>
-                    <span class="px-3 py-1 bg-black border border-gray-700 rounded text-sm text-gray-300 hover:border-[#00ffcc] transition cursor-default">HTML</span>
-                    <span class="px-3 py-1 bg-black border border-gray-700 rounded text-sm text-[#00ffcc] border-[#00ffcc] cursor-default">CI/CD Pipelines</span>
-                </div>
-            </section>
-
-            <!-- Server Stats (Visual) -->
-            <section class="cyber-border p-6 bg-gray-900/50 rounded-lg">
-                <h2 class="text-xl glow-text text-white mb-4">📊 System Status</h2>
-                <ul class="space-y-3 text-sm text-gray-400">
-                    <li class="flex justify-between"><span>Uptime:</span> <span class="text-white">99.9%</span></li>
-                    <li class="flex justify-between"><span>Deployments:</span> <span class="text-white">Automated</span></li>
-                    <li class="flex justify-between"><span>Host:</span> <span class="text-white">GitHub Edge Network</span></li>
-                </ul>
-            </section>
+    <!-- Professional Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-10 text-center">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-2xl font-bold text-white mb-4">Wanderlust Escapes Pvt. Ltd.</h2>
+            <p class="mb-2">Demonstrating modern cloud delivery networks and automated CI/CD deployment pipelines.</p>
+            <p class="text-sm">Built dynamically via GitHub Actions Edge Network.</p>
+            <div class="mt-8 pt-8 border-t border-slate-800 text-sm flex justify-center gap-4">
+                <span>Terms of Service</span>
+                <span>Privacy Policy</span>
+                <span>Sitemap</span>
+            </div>
         </div>
-    </div>
-
-    <footer class="mt-12 text-center text-gray-600 text-xs pb-4 border-t border-gray-800 pt-4">
-        Dayananda Sagar Academy of Technology and Management | Final Year DevOps Project Environment
     </footer>
 
 </body>
