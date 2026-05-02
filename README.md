@@ -1,3 +1,4 @@
+[![Deploy static content to Pages](https://github.com/Yuvan-08/My-DevOps-Project/actions/workflows/static.yml/badge.svg)](https://github.com/Yuvan-08/My-DevOps-Project/actions/workflows/static.yml)
 # 🚀 Automated CI/CD Pipeline & Edge Deployment
 
 **Final Year Computer Science DevOps Project**
