@@ -4,6 +4,10 @@ on:
   push:
     branches: ["main"]
 
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   inspection:
     runs-on: ubuntu-latest
@@ -11,7 +15,7 @@ jobs:
       - name: Fetch Code
         uses: actions/checkout@v4
 
-      - name: Install Professional Inspector (HTMLHint)
+      - name: Install Professional Inspector
         run: npm install -g htmlhint
 
       - name: Run Deep HTML Validation
@@ -23,6 +27,13 @@ jobs:
         run: |
           echo "Checking for unauthorized strings..."
           if grep -qiE "malicious_code|abcdef|TODO" index.html; then
-            echo "ERROR: Quality Gate Failed. Unauthorized content or placeholders detected."
+            echo "ERROR: Quality Gate Failed."
             exit 1
           fi
+
+      - name: Auto-Create Bug Ticket
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create --title "🚨 Pipeline Failure: Code Quality Breach" --body "The Enterprise CI Pipeline caught an error before deployment. Please check the Action logs and fix the code." --assignee "Yuvan-08"
