@@ -3,135 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wanderlust Escapes | Premium Tour Packages</title>
+    <meta name="description" content="Enterprise-grade travel experiences curated for the modern explorer.">
+    <title>Discover the Unseen with Yuvan!</title>
+    
+    <!-- Tailwind CSS for enterprise-grade styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
-        body { font-family: 'Poppins', sans-serif; background-color: #f8fafc; color: #1e293b; }
-        h1, h2, h3 { font-family: 'Playfair Display', serif; }
-        .hero-bg {
-            background-image: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
-            background-size: cover;
-            background-position: center;
-        }
-        .card-zoom:hover img { transform: scale(1.05); transition: transform 0.5s ease; }
-    </style>
+    
+    <!-- 3D WebGL Engines -->
+    <script src="https://unpkg.com/three"></script>
+    <script src="https://unpkg.com/globe.gl"></script>
 </head>
-<body class="antialiased">
+<body class="bg-black text-white m-0 p-0 overflow-x-hidden">
 
-    <!-- Navigation -->
-    <nav class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold text-emerald-600 flex items-center gap-2">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                Wanderlust Escapes
-            </div>
-            <div class="hidden md:flex gap-6 font-semibold text-slate-600">
-                <a href="#" class="hover:text-emerald-600 transition">Destinations</a>
-                <a href="#" class="hover:text-emerald-600 transition">Corporate Packages</a>
-                <a href="#" class="hover:text-emerald-600 transition">About Us</a>
-            </div>
-            <button class="bg-emerald-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-emerald-700 transition shadow-md">Book Now</button>
-        </div>
+    <!-- Transparent Navigation Bar -->
+    <nav class="absolute top-0 w-full z-20 flex justify-between items-center p-6 bg-gradient-to-b from-black/80 to-transparent">
+        <div class="text-2xl font-bold tracking-widest text-white drop-shadow-lg">WANDERLUST</div>
+        <button class="bg-emerald-500 hover:bg-emerald-400 text-black font-bold py-2 px-6 rounded-full transition-all">
+            Book Now
+        </button>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="hero-bg h-[60vh] flex flex-col justify-center items-center text-center px-6 text-white">
-        <h1 class="text-5xl md:text-7xl font-bold mb-6 drop-shadow-lg">Discover the Unseen with Yuvan!</h1>
-        <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8 font-light drop-shadow-md">
-            Enterprise-grade travel experiences curated for the modern explorer. From urban tech hubs to serene natural gateways.
-        </p>
-    </header>
-
-    <!-- Tour Packages Section -->
-    <section class="py-20 px-6 max-w-7xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold mb-4 text-slate-800">Exclusive Domestic Routes</h2>
-            <p class="text-slate-500">Premium itineraries automatically deployed via CI/CD pipelines.</p>
-        </div>
+    <!-- 3D Interactive Hero Section -->
+    <main id="globe-container" class="w-full h-screen relative flex justify-center items-center cursor-crosshair">
         
-        <div class="grid md:grid-cols-3 gap-10">
-            
-            <!-- Package 1: Bengaluru -->
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-zoom group border border-slate-100">
-                <div class="h-60 overflow-hidden relative">
-                    <span class="absolute top-4 right-4 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10">Best Seller</span>
-                    <img src="https://images.unsplash.com/photo-1596176530529-78163a4f7af2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Bengaluru" class="w-full h-full object-cover transition duration-500">
-                </div>
-                <div class="p-6 border-t-4 border-emerald-500">
-                    <div class="flex justify-between items-center mb-3">
-                        <h3 class="text-2xl font-bold">The Bengaluru Escape</h3>
-                        <span class="font-semibold text-emerald-600">₹14,999</span>
-                    </div>
-                    <p class="text-slate-500 text-sm mb-4 leading-relaxed">
-                        Experience the perfect blend of lush green parks and high-tech corporate architecture in the Silicon Valley of India. Includes premium stay and guided city tours.
-                    </p>
-                    <div class="flex items-center text-xs text-slate-400 gap-4 mb-6">
-                        <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"></path></svg> 3 Days</span>
-                        <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg> City & Tech</span>
-                    </div>
-                    <button class="w-full py-3 bg-slate-900 text-white rounded-xl font-semibold hover:bg-emerald-600 transition duration-300">View Itinerary</button>
-                </div>
-            </div>
-
-            <!-- Package 2: Kolkata -->
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-zoom group border border-slate-100">
-                <div class="h-60 overflow-hidden relative">
-                    <img src="https://images.unsplash.com/photo-1558431382-27e303142255?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Kolkata" class="w-full h-full object-cover transition duration-500">
-                </div>
-                <div class="p-6 border-t-4 border-amber-500">
-                    <div class="flex justify-between items-center mb-3">
-                        <h3 class="text-2xl font-bold">Cultural Kolkata</h3>
-                        <span class="font-semibold text-amber-600">₹18,500</span>
-                    </div>
-                    <p class="text-slate-500 text-sm mb-4 leading-relaxed">
-                        A deep dive into the City of Joy. Walk through colonial architecture, cross the iconic Howrah Bridge, and experience unmatched culinary heritage.
-                    </p>
-                    <div class="flex items-center text-xs text-slate-400 gap-4 mb-6">
-                        <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"></path></svg> 4 Days</span>
-                        <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg> Heritage Walk</span>
-                    </div>
-                    <button class="w-full py-3 bg-slate-900 text-white rounded-xl font-semibold hover:bg-amber-500 transition duration-300">View Itinerary</button>
-                </div>
-            </div>
-
-            <!-- Package 3: Guwahati -->
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-zoom group border border-slate-100">
-                <div class="h-60 overflow-hidden relative">
-                    <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Guwahati" class="w-full h-full object-cover transition duration-500">
-                </div>
-                <div class="p-6 border-t-4 border-blue-500">
-                    <div class="flex justify-between items-center mb-3">
-                        <h3 class="text-2xl font-bold">Guwahati Gateway</h3>
-                        <span class="font-semibold text-blue-600">₹22,000</span>
-                    </div>
-                    <p class="text-slate-500 text-sm mb-4 leading-relaxed">
-                        Journey to the Northeast. Experience the mighty Brahmaputra river, ancient temples, and breathtaking scenic flights into the heart of Assam.
-                    </p>
-                    <div class="flex items-center text-xs text-slate-400 gap-4 mb-6">
-                        <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"></path></svg> 5 Days</span>
-                        <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg> Nature & Rivers</span>
-                    </div>
-                    <button class="w-full py-3 bg-slate-900 text-white rounded-xl font-semibold hover:bg-blue-500 transition duration-300">View Itinerary</button>
-                </div>
-            </div>
-
+        <!-- Floating Text Overlay -->
+        <div class="absolute z-10 pointer-events-none text-center flex flex-col items-center justify-center h-full">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
+                Discover the Unseen with Yuvan!
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-200 drop-shadow-md bg-black/40 px-6 py-3 rounded-full border border-gray-600/50 backdrop-blur-sm">
+                Click any glowing destination on the globe to explore.
+            </p>
         </div>
-    </section>
 
-    <!-- Professional Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-10 text-center">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-2xl font-bold text-white mb-4">Wanderlust Escapes Pvt. Ltd.</h2>
-            <p class="mb-2">Demonstrating modern cloud delivery networks and automated CI/CD deployment pipelines.</p>
-            <p class="text-sm">Built dynamically via GitHub Actions Edge Network.</p>
-            <div class="mt-8 pt-8 border-t border-slate-800 text-sm flex justify-center gap-4">
-                <span>Terms of Service</span>
-                <span>Privacy Policy</span>
-                <span>Sitemap</span>
-            </div>
-        </div>
-    </footer>
+        <!-- The 3D Globe automatically renders inside this div -->
+        <div id="globeViz" class="w-full h-full"></div>
 
+    </main>
+
+    <!-- 3D Engine Initialization Logic -->
+    <script>
+        // Generate enterprise travel destinations
+        const destinations = [
+            { lat: 48.8566, lng: 2.3522, name: "Paris, France", color: "#00ffea" },
+            { lat: 35.6762, lng: 139.6503, name: "Tokyo, Japan", color: "#ff00aa" },
+            { lat: 40.7128, lng: -74.0060, name: "New York, USA", color: "#00ffea" },
+            { lat: -33.8688, lng: 151.2093, name: "Sydney, Australia", color: "#ff00aa" },
+            { lat: 28.6139, lng: 77.2090, name: "New Delhi, India", color: "#00ffea" },
+            { lat: 25.2048, lng: 55.2708, name: "Dubai, UAE", color: "#ff00aa" },
+            { lat: -22.9068, lng: -43.1729, name: "Rio de Janeiro, Brazil", color: "#00ffea" }
+        ];
+
+        // Initialize the 3D World
+        const elem = document.getElementById('globeViz');
+        const world = Globe()
+            (elem)
+            .globeImageUrl('https://unpkg.com/three-globe/example/img/earth-night.jpg')
+            .bumpImageUrl('https://unpkg.com/three-globe/example/img/earth-topology.png')
+            .backgroundColor('rgba(0,0,0,0)') // Keeps the background transparent to blend with CSS
+            .labelsData(destinations)
+            .labelLat(d => d.lat)
+            .labelLng(d => d.lng)
+            .labelText(d => d.name)
+            .labelSize(1.5)
+            .labelDotRadius(0.5)
+            .labelColor(d => d.color)
+            .labelResolution(2)
+            .onLabelClick(d => {
+                // The "Go Inside" Camera Effect
+                world.pointOfView({ lat: d.lat, lng: d.lng, altitude: 0.2 }, 1500);
+                setTimeout(() => {
+                    alert("Welcome to " + d.name + "! \nEnterprise Deployment Successful.");
+                }, 1600);
+            });
+
+        // Auto-spin the globe
+        world.controls().autoRotate = true;
+        world.controls().autoRotateSpeed = 1.0;
+
+        // Make the globe responsive if the user resizes their browser
+        window.addEventListener('resize', () => {
+            world.width(elem.clientWidth);
+            world.height(elem.clientHeight);
+        });
+    </script>
 </body>
 </html>
