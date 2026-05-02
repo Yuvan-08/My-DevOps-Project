@@ -3,74 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yuvan | Tech & Business Portfolio</title>
+    <title>Yuvan | DevOps Command Center</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f8fafc; }
-        .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Orbitron:wght@500;700&display=swap');
+        body { font-family: 'Fira Code', monospace; background-color: #050505; color: #00ffcc; overflow-x: hidden; }
+        .cyber-border { border: 1px solid #00ffcc; box-shadow: 0 0 10px rgba(0, 255, 204, 0.2); }
+        .glow-text { text-shadow: 0 0 8px rgba(0, 255, 204, 0.6); font-family: 'Orbitron', sans-serif; }
+        .pulse-dot { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 204, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 255, 204, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 204, 0); }
+        }
     </style>
 </head>
-<body class="antialiased selection:bg-blue-500 selection:text-white">
+<body class="p-6 md:p-12 selection:bg-cyan-900 selection:text-white">
 
-    <!-- Hero Section -->
-    <header class="min-h-screen flex flex-col justify-center items-center text-center px-6">
-        <h1 class="text-5xl md:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
-            S Yuvan Kumar
-        </h1>
-        <p class="text-xl md:text-2xl text-slate-400 max-w-2xl mx-auto mb-8">
-            Computer Science Engineering Student & Tech-Entrepreneur
-        </p>
-        <div class="flex gap-4">
-            <a href="#experience" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 transition rounded-full font-semibold">View Experience</a>
-            <a href="#skills" class="px-6 py-3 glass-card hover:bg-slate-800 transition rounded-full font-semibold text-white">My Skills</a>
+    <!-- Header -->
+    <header class="mb-12 border-b border-gray-800 pb-6 flex flex-col md:flex-row justify-between items-center">
+        <div>
+            <h1 class="text-4xl md:text-5xl font-bold glow-text text-white mb-2">S Yuvan Kumar</h1>
+            <p class="text-gray-400 text-sm">USN: 1DT23CS186 | Computer Science Engineering</p>
+        </div>
+        <div class="mt-4 md:mt-0 flex items-center gap-3 cyber-border px-4 py-2 rounded bg-gray-900">
+            <div class="w-3 h-3 bg-emerald-400 rounded-full pulse-dot"></div>
+            <span class="text-emerald-400 text-sm font-bold">PIPELINE: ACTIVE</span>
         </div>
     </header>
 
-    <!-- Experience & Leadership Section -->
-    <section id="experience" class="py-20 px-6 max-w-5xl mx-auto">
-        <h2 class="text-3xl font-bold mb-10 text-center border-b border-slate-700 pb-4">Professional Experience & Leadership</h2>
-        
-        <div class="grid md:grid-cols-2 gap-8">
-            <!-- Experience 1 -->
-            <div class="glass-card p-8 rounded-2xl shadow-lg hover:-translate-y-1 transition duration-300">
-                <div class="text-blue-400 font-semibold mb-2">Sri Arunachalam Ventures LLP (SAV)</div>
-                <h3 class="text-2xl font-bold mb-3">Business & Land Acquisition Head</h3>
-                <p class="text-slate-400 leading-relaxed">
-                    Spearheading strategic business initiatives and managing corporate acquisitions. Merging analytical technical thinking with high-level real estate and corporate law requirements.
+    <div class="grid md:grid-cols-3 gap-8">
+        <!-- Main Content Area -->
+        <div class="md:col-span-2 space-y-8">
+            
+            <!-- DevOps Architecture Section -->
+            <section class="cyber-border p-6 bg-gray-900/50 rounded-lg relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#00ffcc] to-transparent opacity-50"></div>
+                <h2 class="text-2xl glow-text text-white mb-4">🚀 Automated Deployment Architecture</h2>
+                <p class="text-gray-400 mb-4 text-sm leading-relaxed">
+                    This environment demonstrates a modern Continuous Integration & Continuous Deployment (CI/CD) workflow. Changes committed to the repository are automatically built, tested, and pushed to the edge network via GitHub Actions.
                 </p>
-            </div>
+                <div class="bg-black p-4 rounded border border-gray-800 font-mono text-sm text-gray-300">
+                    > Initiating build sequence... [OK]<br>
+                    > Packaging assets... [OK]<br>
+                    > Deploying to live server... <span class="text-emerald-400">[SUCCESS]</span>
+                </div>
+            </section>
 
-            <!-- Experience 2 -->
-            <div class="glass-card p-8 rounded-2xl shadow-lg hover:-translate-y-1 transition duration-300">
-                <div class="text-emerald-400 font-semibold mb-2">EmpowerU</div>
-                <h3 class="text-2xl font-bold mb-3">Founder & Club Lead</h3>
-                <p class="text-slate-400 leading-relaxed">
-                    Established and led campus initiatives. Organized national-level technical hackathons, secured corporate sponsorships, and actively fostered a community of innovation and tech leadership.
-                </p>
-            </div>
+            <!-- Leadership & Innovation -->
+            <section class="cyber-border p-6 bg-gray-900/50 rounded-lg">
+                <h2 class="text-2xl glow-text text-white mb-4">⚡ Campus Leadership & Innovation</h2>
+                <div class="border-l-2 border-[#00ffcc] pl-4 mb-4">
+                    <h3 class="text-xl font-bold text-white">EmpowerU - Founder & Club Lead</h3>
+                    <p class="text-gray-400 text-sm mt-2">
+                        Driving tech-entrepreneurship and innovation on campus. Lead organizer for national-level technical hackathons, securing corporate sponsorships, and mentoring student developers in cutting-edge tech.
+                    </p>
+                </div>
+            </section>
+
         </div>
-    </section>
 
-    <!-- Tech Skills Section -->
-    <section id="skills" class="py-20 px-6 bg-slate-900">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-10 border-b border-slate-700 pb-4">Technical Arsenal</h2>
-            <div class="flex flex-wrap justify-center gap-4">
-                <span class="px-5 py-2 glass-card rounded-full text-blue-300 font-medium">Python</span>
-                <span class="px-5 py-2 glass-card rounded-full text-blue-300 font-medium">C / C++</span>
-                <span class="px-5 py-2 glass-card rounded-full text-blue-300 font-medium">SQL</span>
-                <span class="px-5 py-2 glass-card rounded-full text-blue-300 font-medium">HTML</span>
-                <span class="px-5 py-2 glass-card rounded-full text-blue-300 font-medium">Data Analysis (Excel)</span>
-                <span class="px-5 py-2 glass-card rounded-full text-emerald-300 font-medium">DevOps (CI/CD Pipelines)</span>
-            </div>
+        <!-- Sidebar -->
+        <div class="space-y-8">
+            <!-- Tech Stack -->
+            <section class="cyber-border p-6 bg-gray-900/50 rounded-lg">
+                <h2 class="text-xl glow-text text-white mb-4">🛠️ Tech Stack</h2>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-black border border-gray-700 rounded text-sm text-gray-300 hover:border-[#00ffcc] transition cursor-default">Python</span>
+                    <span class="px-3 py-1 bg-black border border-gray-700 rounded text-sm text-gray-300 hover:border-[#00ffcc] transition cursor-default">C/C++</span>
+                    <span class="px-3 py-1 bg-black border border-gray-700 rounded text-sm text-gray-300 hover:border-[#00ffcc] transition cursor-default">SQL</span>
+                    <span class="px-3 py-1 bg-black border border-gray-700 rounded text-sm text-gray-300 hover:border-[#00ffcc] transition cursor-default">HTML</span>
+                    <span class="px-3 py-1 bg-black border border-gray-700 rounded text-sm text-[#00ffcc] border-[#00ffcc] cursor-default">CI/CD Pipelines</span>
+                </div>
+            </section>
+
+            <!-- Server Stats (Visual) -->
+            <section class="cyber-border p-6 bg-gray-900/50 rounded-lg">
+                <h2 class="text-xl glow-text text-white mb-4">📊 System Status</h2>
+                <ul class="space-y-3 text-sm text-gray-400">
+                    <li class="flex justify-between"><span>Uptime:</span> <span class="text-white">99.9%</span></li>
+                    <li class="flex justify-between"><span>Deployments:</span> <span class="text-white">Automated</span></li>
+                    <li class="flex justify-between"><span>Host:</span> <span class="text-white">GitHub Edge Network</span></li>
+                </ul>
+            </section>
         </div>
-    </section>
+    </div>
 
-    <!-- Footer for DevOps Proof -->
-    <footer class="py-8 text-center text-slate-500 text-sm glass-card mt-10">
-        <p>System continuously integrated and deployed via <strong>GitHub Actions</strong>.</p>
-        <p>USN: 1DT23CS186 | Final Year DevOps Project</p>
+    <footer class="mt-12 text-center text-gray-600 text-xs pb-4 border-t border-gray-800 pt-4">
+        Dayananda Sagar Academy of Technology and Management | Final Year DevOps Project Environment
     </footer>
 
 </body>
