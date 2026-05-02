@@ -3,15 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My DevOps Project</title>
+    <title>Yuvan | Tech & Business Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin-top: 20%; background-color: #f4f4f9; }
-        h1 { color: #333; }
-        p { color: #666; font-size: 18px; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f8fafc; }
+        .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
     </style>
 </head>
-<body>
-    <h1>🚀 Welcome to my Final Year DevOps Project! My Automated Pipeline is Working!</h1>
-    <p>This is my final-year DevOps project deployed successfully.</p>
+<body class="antialiased selection:bg-blue-500 selection:text-white">
+
+    <!-- Hero Section -->
+    <header class="min-h-screen flex flex-col justify-center items-center text-center px-6">
+        <h1 class="text-5xl md:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
+            S Yuvan Kumar
+        </h1>
+        <p class="text-xl md:text-2xl text-slate-400 max-w-2xl mx-auto mb-8">
+            Computer Science Engineering Student & Tech-Entrepreneur
+        </p>
+        <div class="flex gap-4">
+            <a href="#experience" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 transition rounded-full font-semibold">View Experience</a>
+            <a href="#skills" class="px-6 py-3 glass-card hover:bg-slate-800 transition rounded-full font-semibold text-white">My Skills</a>
+        </div>
+    </header>
+
+    <!-- Experience & Leadership Section -->
+    <section id="experience" class="py-20 px-6 max-w-5xl mx-auto">
+        <h2 class="text-3xl font-bold mb-10 text-center border-b border-slate-700 pb-4">Professional Experience & Leadership</h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Experience 1 -->
+            <div class="glass-card p-8 rounded-2xl shadow-lg hover:-translate-y-1 transition duration-300">
+                <div class="text-blue-400 font-semibold mb-2">Sri Arunachalam Ventures LLP (SAV)</div>
+                <h3 class="text-2xl font-bold mb-3">Business & Land Acquisition Head</h3>
+                <p class="text-slate-400 leading-relaxed">
+                    Spearheading strategic business initiatives and managing corporate acquisitions. Merging analytical technical thinking with high-level real estate and corporate law requirements.
+                </p>
+            </div>
+
+            <!-- Experience 2 -->
+            <div class="glass-card p-8 rounded-2xl shadow-lg hover:-translate-y-1 transition duration-300">
+                <div class="text-emerald-400 font-semibold mb-2">EmpowerU</div>
+                <h3 class="text-2xl font-bold mb-3">Founder & Club Lead</h3>
+                <p class="text-slate-400 leading-relaxed">
+                    Established and led campus initiatives. Organized national-level technical hackathons, secured corporate sponsorships, and actively fostered a community of innovation and tech leadership.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Skills Section -->
+    <section id="skills" class="py-20 px-6 bg-slate-900">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-10 border-b border-slate-700 pb-4">Technical Arsenal</h2>
+            <div class="flex flex-wrap justify-center gap-4">
+                <span class="px-5 py-2 glass-card rounded-full text-blue-300 font-medium">Python</span>
+                <span class="px-5 py-2 glass-card rounded-full text-blue-300 font-medium">C / C++</span>
+                <span class="px-5 py-2 glass-card rounded-full text-blue-300 font-medium">SQL</span>
+                <span class="px-5 py-2 glass-card rounded-full text-blue-300 font-medium">HTML</span>
+                <span class="px-5 py-2 glass-card rounded-full text-blue-300 font-medium">Data Analysis (Excel)</span>
+                <span class="px-5 py-2 glass-card rounded-full text-emerald-300 font-medium">DevOps (CI/CD Pipelines)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer for DevOps Proof -->
+    <footer class="py-8 text-center text-slate-500 text-sm glass-card mt-10">
+        <p>System continuously integrated and deployed via <strong>GitHub Actions</strong>.</p>
+        <p>USN: 1DT23CS186 | Final Year DevOps Project</p>
+    </footer>
+
 </body>
 </html>
