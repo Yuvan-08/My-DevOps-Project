@@ -37,6 +37,16 @@
             box-shadow: 0 0 10px rgba(0, 255, 234, 0.2); transition: all 0.3s ease;
         }
         .cyber-btn:hover { background: #00ffea; color: #000; box-shadow: 0 0 20px rgba(0, 255, 234, 0.8); }
+
+        /* Smooth UI Fade */
+        .ui-container { transition: opacity 0.5s ease-in-out; }
+        
+        /* Toast Notification */
+        .toast {
+            animation: slideUp 0.3s ease-out forwards, fadeOut 0.5s ease-in 2.5s forwards;
+        }
+        @keyframes slideUp { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
     </style>
 </head>
 <body>
@@ -48,18 +58,18 @@
         <div id="term-4" class="terminal-text" style="color: #fff; font-weight: bold; font-size: 1.5rem; margin-top: 20px;">> Welcome, DSATM.</div>
     </div>
 
-    <div class="absolute top-0 left-0 w-full h-full pointer-events-none z-10 flex flex-col justify-between p-8">
+    <div id="main-ui" class="absolute top-0 left-0 w-full h-full pointer-events-none z-10 flex flex-col justify-between p-8 ui-container">
         
         <header class="flex justify-between items-center w-full max-w-7xl mx-auto pointer-events-auto glass-panel px-8 py-4 rounded-2xl">
             <div class="text-2xl font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">
                 WANDERLUST EDGE
             </div>
             <nav class="hidden md:flex gap-8 text-sm font-medium text-gray-300">
-                <a href="#" class="hover:text-white transition">Destinations</a>
-                <a href="#" class="hover:text-white transition">Architecture</a>
-                <a href="#" class="hover:text-white transition">CI/CD Status: <span class="text-emerald-400 font-bold">ONLINE</span></a>
+                <button id="nav-dest" class="hover:text-white transition cursor-pointer">Destinations</button>
+                <button id="nav-arch" class="hover:text-white transition cursor-pointer">Architecture</button>
+                <span class="hover:text-white transition">CI/CD Status: <span class="text-emerald-400 font-bold">ONLINE</span></span>
             </nav>
-            <button class="cyber-btn font-bold py-2 px-6 rounded-full">INITIALIZE</button>
+            <button id="btn-initialize" class="cyber-btn font-bold py-2 px-6 rounded-full cursor-pointer">INITIALIZE</button>
         </header>
 
         <main class="pointer-events-auto max-w-2xl mt-32 ml-8 md:ml-16">
@@ -71,10 +81,10 @@
                     A next-generation travel intelligence platform. Spin the globe, track live automated flight paths, and experience the future of digital exploration.
                 </p>
                 <div class="flex gap-4">
-                    <button class="bg-white text-black font-bold py-3 px-8 rounded-full hover:bg-gray-200 transition shadow-[0_0_15px_rgba(255,255,255,0.4)]">
+                    <button id="btn-explore" class="bg-white text-black font-bold py-3 px-8 rounded-full hover:bg-gray-200 transition shadow-[0_0_15px_rgba(255,255,255,0.4)] cursor-pointer">
                         Explore Map
                     </button>
-                    <button class="glass-panel text-white font-bold py-3 px-8 rounded-full hover:bg-white/10 transition">
+                    <button id="btn-pipeline" class="glass-panel text-white font-bold py-3 px-8 rounded-full hover:bg-white/10 transition cursor-pointer">
                         View Pipeline
                     </button>
                 </div>
@@ -90,7 +100,27 @@
         </footer>
     </div>
 
-    <div class="pointer-events-auto glass-panel" style="position: absolute; bottom: 80px; right: 40px; z-index: 1000; padding: 20px; border-radius: 10px; color: white;">
+    <button id="btn-return" class="hidden absolute top-8 left-8 z-50 glass-panel text-white font-bold py-3 px-8 rounded-full hover:bg-white/10 transition cursor-pointer">
+        ← Return to Dashboard
+    </button>
+
+    <div id="modal-pipeline" class="hidden absolute top-0 left-0 w-full h-full z-50 bg-black/80 backdrop-blur-md flex justify-center items-center">
+        <div class="glass-panel p-8 rounded-2xl w-full max-w-2xl border border-teal-500/50 shadow-[0_0_30px_rgba(0,255,234,0.1)]">
+            <h2 class="text-2xl font-bold text-teal-400 mb-4 tracking-wider">CI/CD Pipeline Telemetry</h2>
+            <div class="font-mono text-sm text-gray-300 space-y-3 bg-black/60 p-6 rounded-lg border border-gray-800">
+                <p class="text-emerald-400">✓ Phase 1: Pre-Build Static Analysis (AST) ... Passed</p>
+                <p class="text-emerald-400">✓ Phase 2: DevSecOps Content Filtering ... Passed</p>
+                <p class="text-emerald-400">✓ Phase 3: Chaos Engineering & IR ... System Resilient</p>
+                <p class="text-blue-400 font-bold">➜ Deploying to GitHub Pages Edge Network ... Success</p>
+                <p class="text-emerald-400">✓ Phase 4: Lighthouse Core Web Vitals ... LCP Optimized</p>
+            </div>
+            <button id="btn-close-modal" class="mt-6 cyber-btn w-full py-3 rounded-lg font-bold tracking-widest cursor-pointer">CLOSE TERMINAL</button>
+        </div>
+    </div>
+
+    <div id="toast-container" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <div id="api-widget" class="pointer-events-auto glass-panel transition-opacity duration-500" style="position: absolute; bottom: 80px; right: 40px; z-index: 40; padding: 20px; border-radius: 10px; color: white;">
         <h3 style="margin-top: 0; font-size: 16px; font-weight: bold; color: #00ffea;">Edge Network Telemetry</h3>
         <button id="live-demo-btn" style="padding: 10px 15px; margin-top: 5px; font-weight: bold; cursor: pointer; background: #00ffea; border: none; border-radius: 5px; color: black; transition: 0.3s;">
             Fetch Live Destinations
@@ -101,7 +131,7 @@
     <div id="globeViz" class="absolute top-0 left-0 w-full h-full z-0 cursor-crosshair"></div>
 
     <script>
-        // 1. The Boot Sequence Animation
+        // --- 1. Boot Sequence ---
         setTimeout(() => document.getElementById('term-1').style.opacity = 1, 500);
         setTimeout(() => document.getElementById('term-2').style.opacity = 1, 1200);
         setTimeout(() => document.getElementById('term-3').style.opacity = 1, 1900);
@@ -112,8 +142,17 @@
             setTimeout(() => loader.style.display = 'none', 1000);
         }, 3800);
 
-        // 2. Advanced 3D Globe Data
-        const N = 8; // Number of cities
+        // --- 2. Toast Notification System ---
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'glass-panel px-6 py-3 rounded-full text-sm font-bold text-white shadow-lg border-teal-500/50 border toast';
+            toast.innerText = message;
+            container.appendChild(toast);
+            setTimeout(() => { toast.remove(); }, 3000);
+        }
+
+        // --- 3. 3D Globe Data & Engine ---
         const cities = [
             { lat: 12.9716, lng: 77.5946, name: "Bengaluru, IN (HQ)", size: 1.5, color: '#00ffea' },
             { lat: 40.7128, lng: -74.0060, name: "New York, USA", size: 0.5, color: '#ffffff' },
@@ -123,62 +162,81 @@
             { lat: 25.2048, lng: 55.2708, name: "Dubai, UAE", size: 0.5, color: '#ffffff' },
         ];
 
-        // Create flight arcs connecting Bengaluru to the world
         const flightArcs = cities.slice(1).map(city => ({
-            startLat: cities[0].lat,
-            startLng: cities[0].lng,
-            endLat: city.lat,
-            endLng: city.lng,
-            color: ['#00ffea', '#ff00aa'] // Gradient laser effect
+            startLat: cities[0].lat, startLng: cities[0].lng, endLat: city.lat, endLng: city.lng, color: ['#00ffea', '#ff00aa']
         }));
 
-        // 3. Initialize the Engine
         const elem = document.getElementById('globeViz');
-        const world = Globe({ animateIn: true })
-            (elem)
+        const world = Globe({ animateIn: true })(elem)
             .globeImageUrl('https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
             .bumpImageUrl('https://unpkg.com/three-globe/example/img/earth-topology.png')
             .backgroundColor('#050505')
-            
-            // Render Cities
-            .labelsData(cities)
-            .labelLat(d => d.lat)
-            .labelLng(d => d.lng)
-            .labelText(d => d.name)
-            .labelSize(d => d.size)
-            .labelDotRadius(0.5)
-            .labelColor(d => d.color)
-            .labelResolution(2)
-            
-            // Render Laser Flight Paths
-            .arcsData(flightArcs)
-            .arcColor('color')
-            .arcDashLength(0.4)
-            .arcDashGap(0.2)
-            .arcDashInitialGap(() => Math.random())
-            .arcDashAnimateTime(2000) // Animates the lasers
-            .arcStroke(0.5);
+            .labelsData(cities).labelLat(d => d.lat).labelLng(d => d.lng).labelText(d => d.name).labelSize(d => d.size).labelColor(d => d.color).labelResolution(2)
+            .arcsData(flightArcs).arcColor('color').arcDashLength(0.4).arcDashGap(0.2).arcDashInitialGap(() => Math.random()).arcDashAnimateTime(2000).arcStroke(0.5);
 
-        // 4. Camera & Interaction Physics
         world.pointOfView({ lat: 20, lng: 60, altitude: 2.5 });
         world.controls().autoRotate = true;
         world.controls().autoRotateSpeed = 0.8;
-        world.controls().enableZoom = false; // Prevents breaking the UI overlay
 
-        // Update the Live Coordinates Tracker
         world.onGlobeClick(({ lat, lng }) => {
             document.getElementById('lat-tracker').innerText = lat.toFixed(2);
             document.getElementById('lng-tracker').innerText = lng.toFixed(2);
             world.pointOfView({ lat: lat, lng: lng, altitude: 1.2 }, 1000);
         });
 
-        // Responsive Engine Reset
-        window.addEventListener('resize', () => {
-            world.width(elem.clientWidth);
-            world.height(elem.clientHeight);
+        window.addEventListener('resize', () => { world.width(elem.clientWidth); world.height(elem.clientHeight); });
+
+        // --- 4. INTERACTIVE BUTTON LOGIC ---
+
+        // INITIALIZE Button: Cinematic Camera Zoom to Bengaluru HQ
+        document.getElementById('btn-initialize').addEventListener('click', () => {
+            showToast("System Initialized: Targeting Bengaluru HQ...");
+            world.controls().autoRotate = false;
+            world.pointOfView({ lat: 12.9716, lng: 77.5946, altitude: 0.8 }, 2500); // Zooms into Bengaluru over 2.5 seconds
+            setTimeout(() => { world.controls().autoRotate = true; }, 3000);
         });
 
-        // 5. Backend API Integration Logic
+        // EXPLORE MAP Button: Hides the UI to view the globe
+        const mainUI = document.getElementById('main-ui');
+        const apiWidget = document.getElementById('api-widget');
+        const btnReturn = document.getElementById('btn-return');
+
+        document.getElementById('btn-explore').addEventListener('click', () => {
+            mainUI.style.opacity = '0';
+            apiWidget.style.opacity = '0';
+            setTimeout(() => { 
+                mainUI.classList.add('hidden'); 
+                apiWidget.classList.add('hidden'); 
+                btnReturn.classList.remove('hidden'); 
+            }, 500);
+            showToast("Free Exploration Mode Activated");
+        });
+
+        // RETURN TO DASHBOARD Button
+        btnReturn.addEventListener('click', () => {
+            mainUI.classList.remove('hidden');
+            apiWidget.classList.remove('hidden');
+            btnReturn.classList.add('hidden');
+            setTimeout(() => { 
+                mainUI.style.opacity = '1'; 
+                apiWidget.style.opacity = '1'; 
+            }, 50);
+        });
+
+        // VIEW PIPELINE Button: Opens the CI/CD Terminal Modal
+        const pipelineModal = document.getElementById('modal-pipeline');
+        document.getElementById('btn-pipeline').addEventListener('click', () => {
+            pipelineModal.classList.remove('hidden');
+        });
+        document.getElementById('btn-close-modal').addEventListener('click', () => {
+            pipelineModal.classList.add('hidden');
+        });
+
+        // Top Navigation Links (Mock routing with Toast messages)
+        document.getElementById('nav-dest').addEventListener('click', () => { showToast("Routing to Global Destinations Database..."); });
+        document.getElementById('nav-arch').addEventListener('click', () => { showToast("Loading System Architecture Schematics..."); });
+
+        // --- 5. Backend API Fetch ---
         document.getElementById('live-demo-btn').addEventListener('click', async () => {
             const output = document.getElementById('demo-output');
             output.innerHTML = "Connecting to backend server...";
