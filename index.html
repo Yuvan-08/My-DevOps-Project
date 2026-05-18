@@ -22,20 +22,15 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
         }
 
-        /* Loading Screen */
-        #loader {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #000; z-index: 9999; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; transition: opacity 1s ease-out;
-        }
-        .terminal-text { font-family: monospace; color: #00ffea; font-size: 1.2rem; margin-bottom: 10px; opacity: 0; }
+        /* Loading Screen Text */
+        .terminal-text { font-family: monospace; color: #00ffea; font-size: 1.2rem; margin-bottom: 10px; opacity: 0; transition: opacity 0.3s ease; }
         
         /* Glowing Buttons */
         .cyber-btn {
             background: transparent; border: 1px solid #00ffea; color: #00ffea;
             box-shadow: 0 0 10px rgba(0, 255, 234, 0.2); transition: all 0.3s ease;
         }
-        .cyber-btn:hover { background: #00ffea; color: #000; box-shadow: 0 0 20px rgba(0, 255, 234, 0.8); }
+        .cyber-btn:hover { background: #00ffea; color: #000; box-shadow: 0 0 20px rgba(0, 255, 234, 0.8); transform: scale(1.05); }
 
         /* UI Fade & Transitions */
         .ui-container { transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; }
@@ -52,11 +47,32 @@
 </head>
 <body>
 
-    <div id="loader">
-        <div id="term-1" class="terminal-text">> Initiating Edge Network Deployment...</div>
-        <div id="term-2" class="terminal-text">> Compiling WebGL Shaders...</div>
-        <div id="term-3" class="terminal-text">> Securing CI/CD Pipeline...</div>
-        <div id="term-4" class="terminal-text" style="color: #fff; font-weight: bold; font-size: 1.5rem; margin-top: 20px;">> Welcome, DSATM Faculty.</div>
+    <div id="entry-portal" class="fixed top-0 left-0 w-screen h-screen bg-black z-[9999] flex flex-col justify-center items-center transition-all duration-1000">
+        
+        <div id="boot-sequence" class="flex flex-col items-center">
+            <div id="term-1" class="terminal-text">> Initiating Edge Network Deployment...</div>
+            <div id="term-2" class="terminal-text">> Compiling WebGL Shaders...</div>
+            <div id="term-3" class="terminal-text">> Securing CI/CD Pipeline...</div>
+            <div id="term-4" class="terminal-text" style="color: #fff; font-weight: bold; font-size: 1.5rem; margin-top: 20px;">> Welcome, DSATM Faculty.</div>
+        </div>
+
+        <div id="welcome-screen" class="hidden flex-col items-center justify-center text-center px-4 opacity-0 transition-opacity duration-1000">
+            <div class="glass-panel p-10 rounded-3xl border border-teal-500/30 max-w-4xl shadow-[0_0_50px_rgba(0,255,234,0.1)]">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                    Welcome to the <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">Best Destination Spot.</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-2">
+                    Seamlessly crafted plans by <span class="text-white font-bold tracking-wider">S Yuvan Kumar</span>
+                </p>
+                <div class="inline-block border border-teal-500/50 bg-teal-900/20 px-4 py-1 rounded-full mb-10">
+                    <p class="text-sm font-mono text-teal-400">System Architect | USN: 1DT23CS186</p>
+                </div>
+                <br>
+                <button id="btn-enter-site" class="cyber-btn py-4 px-12 rounded-full font-bold tracking-widest text-lg cursor-pointer">
+                    ENTER PLATFORM
+                </button>
+            </div>
+        </div>
     </div>
 
     <div id="main-ui" class="absolute top-0 left-0 w-full h-full pointer-events-none z-10 flex flex-col justify-between p-8 ui-container">
@@ -93,317 +109,4 @@
         </main>
 
         <footer class="w-full max-w-7xl mx-auto flex justify-end">
-            <div class="glass-panel px-6 py-3 rounded-full text-xs font-mono text-gray-400 flex gap-6 tracking-widest">
-                <span>LAT: <span id="lat-tracker">0.00</span></span>
-                <span>LNG: <span id="lng-tracker">0.00</span></span>
-                <span class="text-teal-400">SYS: OPTIMAL</span>
-            </div>
-        </footer>
-    </div>
-
-    <div id="api-widget" class="pointer-events-auto glass-panel" style="position: absolute; bottom: 80px; right: 40px; z-index: 40; padding: 25px; border-radius: 10px; color: white; width: 320px;">
-        <h3 style="margin-top: 0; font-size: 16px; font-weight: bold; color: #00ffea; display: flex; justify-content: space-between;">
-            Edge Network Telemetry 
-            <span class="text-emerald-400 font-bold blink text-xs" style="color: #4ade80;">LIVE</span>
-        </h3>
-        
-        <div id="flight-telemetry-display" class="hidden mb-5 font-mono text-xs text-gray-300 space-y-1 bg-black/50 p-4 rounded-lg border border-gray-800">
-            <p>Target: <span id="telemetry-target" class="text-white font-bold">---</span></p>
-            <p>Phase: <span id="telemetry-phase" class="text-teal-400">Ready</span></p>
-            <p>Altitude: <span id="telemetry-alt">---</span> ft</p>
-            <p>Gnd Spd: <span id="telemetry-speed">---</span> km/h</p>
-            <div class="w-full bg-gray-800 rounded-full h-1.5 mt-3">
-                <div id="telemetry-progress" class="bg-teal-400 h-1.5 rounded-full" style="width: 0%"></div>
-            </div>
-        </div>
-
-        <div id="demo-output" class="mb-5 text-sm text-gray-300"></div>
-
-        <div class="flex flex-col gap-3">
-            <button id="live-demo-btn" class="cyber-btn w-full py-2.5 rounded-lg font-bold text-xs cursor-pointer">
-                1. Fetch Cloud Destinations
-            </button>
-            <button id="btn-simulate-flight" class="hidden w-full py-2.5 rounded-lg font-bold text-xs cursor-pointer text-black" style="background: #00ffea;">
-                2. Simulate Active Flight Path
-            </button>
-        </div>
-    </div>
-
-    <div id="modal-pipeline" class="hidden absolute top-0 left-0 w-full h-full z-50 bg-black/80 backdrop-blur-md flex justify-center items-center pointer-events-auto">
-        <div class="glass-panel p-8 rounded-2xl w-full max-w-2xl border border-teal-500/50 shadow-[0_0_30px_rgba(0,255,234,0.1)]">
-            <h2 class="text-2xl font-bold text-teal-400 mb-4 tracking-wider">CI/CD Pipeline Telemetry</h2>
-            <div class="font-mono text-sm text-gray-300 space-y-3 bg-black/60 p-6 rounded-lg border border-gray-800">
-                <p class="text-emerald-400">✓ Phase 1: Pre-Build Static Analysis (AST) ... Passed</p>
-                <p class="text-emerald-400">✓ Phase 2: DevSecOps Content Filtering ... Passed</p>
-                <p class="text-emerald-400">✓ Phase 3: Chaos Engineering & IR ... System Resilient</p>
-                <p class="text-blue-400 font-bold">➜ Deploying to GitHub Pages Edge Network ... Success</p>
-                <p class="text-emerald-400">✓ Phase 4: Lighthouse Core Web Vitals ... LCP Optimized</p>
-            </div>
-            <button id="btn-close-modal" class="mt-6 cyber-btn w-full py-3 rounded-lg font-bold tracking-widest cursor-pointer">CLOSE TERMINAL</button>
-        </div>
-    </div>
-
-    <div id="modal-architecture" class="hidden absolute top-0 left-0 w-full h-full z-50 bg-black/80 backdrop-blur-md flex justify-center items-center pointer-events-auto">
-        <div class="glass-panel p-8 rounded-2xl w-full max-w-3xl border border-blue-500/50 shadow-[0_0_30px_rgba(59,130,246,0.1)]">
-            <h2 class="text-2xl font-bold text-blue-400 mb-6 tracking-wider">System Architecture Blueprint</h2>
-            <div class="grid grid-cols-2 gap-6 font-mono text-sm">
-                <div class="bg-black/60 p-5 rounded-lg border border-gray-800">
-                    <h3 class="text-white font-bold mb-3 border-b border-gray-700 pb-2">Frontend Edge Node</h3>
-                    <ul class="text-gray-400 space-y-2">
-                        <li><span class="text-teal-400">WebGL 3D:</span> Three.js / Globe.gl</li>
-                        <li><span class="text-teal-400">UI Engine:</span> Tailwind CSS v3</li>
-                        <li><span class="text-teal-400">Logic:</span> Asynchronous Fetch API</li>
-                    </ul>
-                </div>
-                <div class="bg-black/60 p-5 rounded-lg border border-gray-800">
-                    <h3 class="text-white font-bold mb-3 border-b border-gray-700 pb-2">Cloud Backend</h3>
-                    <ul class="text-gray-400 space-y-2">
-                        <li><span class="text-blue-400">Runtime:</span> Node.js</li>
-                        <li><span class="text-blue-400">Gateway:</span> Express.js REST API</li>
-                        <li><span class="text-blue-400">Hosting:</span> Render Serverless</li>
-                    </ul>
-                </div>
-                <div class="bg-black/60 p-5 rounded-lg border border-gray-800 col-span-2">
-                    <h3 class="text-white font-bold mb-3 border-b border-gray-700 pb-2">DevSecOps & CI/CD Pipeline</h3>
-                    <ul class="text-gray-400 space-y-2 flex justify-between">
-                        <li><span class="text-emerald-400">VCS:</span> GitHub Repository</li>
-                        <li><span class="text-emerald-400">Automation:</span> GitHub Actions</li>
-                        <li><span class="text-emerald-400">Deployment:</span> GitHub Pages Edge</li>
-                    </ul>
-                </div>
-            </div>
-            <button id="btn-close-arch" class="mt-8 border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-black w-full py-3 rounded-lg font-bold tracking-widest cursor-pointer transition">CLOSE BLUEPRINT</button>
-        </div>
-    </div>
-
-    <div id="modal-destinations" class="hidden absolute top-0 left-0 w-full h-full z-50 bg-black/80 backdrop-blur-md flex justify-center items-center pointer-events-auto">
-        <div class="glass-panel p-8 rounded-2xl w-full max-w-xl border border-purple-500/50 shadow-[0_0_30px_rgba(168,85,247,0.1)]">
-            <h2 class="text-2xl font-bold text-purple-400 mb-6 tracking-wider flex justify-between items-center">
-                Global Edge Nodes <span class="text-xs font-mono text-gray-500">Click to lock coordinates</span>
-            </h2>
-            <div id="dest-list" class="space-y-3 max-h-96 overflow-y-auto pr-2">
-                </div>
-            <button id="btn-close-dest" class="mt-6 border border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-black w-full py-3 rounded-lg font-bold tracking-widest cursor-pointer transition">CLOSE DATABASE</button>
-        </div>
-    </div>
-
-    <button id="btn-return" class="hidden absolute top-8 left-8 z-50 glass-panel text-white font-bold py-3 px-8 rounded-full hover:bg-white/10 transition cursor-pointer pointer-events-auto">
-        ← Return to Dashboard
-    </button>
-
-    <div id="toast-container" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-50 flex flex-col gap-2 pointer-events-none"></div>
-
-    <div id="globeViz" class="absolute top-0 left-0 w-full h-full z-0 cursor-crosshair"></div>
-
-    <script>
-        // --- 1. BOOT SEQUENCE ---
-        setTimeout(() => document.getElementById('term-1').style.opacity = 1, 500);
-        setTimeout(() => document.getElementById('term-2').style.opacity = 1, 1200);
-        setTimeout(() => document.getElementById('term-3').style.opacity = 1, 1900);
-        setTimeout(() => document.getElementById('term-4').style.opacity = 1, 2600);
-        setTimeout(() => {
-            const loader = document.getElementById('loader');
-            loader.style.opacity = 0;
-            setTimeout(() => loader.style.display = 'none', 1000);
-        }, 3800);
-
-        // --- 2. TOAST SYSTEM ---
-        function showToast(message) {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = 'glass-panel px-6 py-3 rounded-full text-sm font-bold text-white shadow-lg border-teal-500/50 border toast';
-            toast.innerText = message;
-            container.appendChild(toast);
-            setTimeout(() => { toast.remove(); }, 3500);
-        }
-
-        // --- 3. 3D GLOBE ENGINE ---
-        const cities = [
-            { lat: 12.9716, lng: 77.5946, name: "Bengaluru, IN (HQ)", size: 1.5, color: '#00ffea' },
-            { lat: 40.7128, lng: -74.0060, name: "New York, USA", size: 0.5, color: '#ffffff' },
-            { lat: 51.5074, lng: -0.1278, name: "London, UK", size: 0.5, color: '#ffffff' },
-            { lat: 35.6762, lng: 139.6503, name: "Tokyo, JP", size: 0.5, color: '#ffffff' },
-            { lat: -33.8688, lng: 151.2093, name: "Sydney, AU", size: 0.5, color: '#ffffff' },
-            { lat: 25.2048, lng: 55.2708, name: "Dubai, UAE", size: 0.5, color: '#ffffff' },
-        ];
-
-        const flightArcs = cities.slice(1).map(city => ({
-            startLat: cities[0].lat, startLng: cities[0].lng, endLat: city.lat, endLng: city.lng, color: ['#00ffea', '#ff00aa']
-        }));
-
-        const elem = document.getElementById('globeViz');
-        const world = Globe({ animateIn: true })(elem)
-            .globeImageUrl('https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
-            .backgroundColor('#050505')
-            .labelsData(cities).labelLat(d => d.lat).labelLng(d => d.lng).labelText(d => d.name).labelSize(d => d.size).labelColor(d => d.color).labelResolution(2)
-            .arcsData(flightArcs).arcColor('color').arcDashLength(0.4).arcDashGap(0.2).arcDashInitialGap(() => Math.random()).arcDashAnimateTime(2000).arcStroke(0.5);
-
-        world.pointOfView({ lat: 20, lng: 60, altitude: 2.5 });
-        world.controls().autoRotate = true; world.controls().autoRotateSpeed = 0.8;
-
-        world.onGlobeClick(({ lat, lng }) => {
-            document.getElementById('lat-tracker').innerText = lat.toFixed(2);
-            document.getElementById('lng-tracker').innerText = lng.toFixed(2);
-            world.pointOfView({ lat: lat, lng: lng, altitude: 1.2 }, 1000);
-        });
-
-        window.addEventListener('resize', () => { world.width(elem.clientWidth); world.height(elem.clientHeight); });
-
-        // --- 4. ENTERPRISE NAVIGATION MODALS ---
-        
-        // Pipeline Modal (Teal)
-        const pipelineModal = document.getElementById('modal-pipeline');
-        document.getElementById('btn-pipeline').addEventListener('click', () => { pipelineModal.classList.remove('hidden'); });
-        document.getElementById('btn-close-modal').addEventListener('click', () => { pipelineModal.classList.add('hidden'); });
-
-        // Architecture Modal (Blue)
-        const archModal = document.getElementById('modal-architecture');
-        document.getElementById('nav-arch').addEventListener('click', () => { archModal.classList.remove('hidden'); });
-        document.getElementById('btn-close-arch').addEventListener('click', () => { archModal.classList.add('hidden'); });
-
-        // Destinations Modal (Purple) & Interactive Map Fly-To Logic
-        const destModal = document.getElementById('modal-destinations');
-        document.getElementById('nav-dest').addEventListener('click', () => { destModal.classList.remove('hidden'); });
-        document.getElementById('btn-close-dest').addEventListener('click', () => { destModal.classList.add('hidden'); });
-        
-        const destList = document.getElementById('dest-list');
-        cities.forEach(city => {
-            const btn = document.createElement('button');
-            btn.className = 'w-full text-left bg-black/60 p-4 rounded-lg border border-gray-800 hover:border-purple-500 hover:bg-purple-900/20 transition cursor-pointer flex justify-between items-center text-gray-300 hover:text-white';
-            btn.innerHTML = `<span><span class="text-purple-400 font-bold mr-2">⌖</span> ${city.name}</span> <span class="text-xs text-gray-500 font-mono">LAT: ${city.lat}</span>`;
-            btn.addEventListener('click', () => {
-                destModal.classList.add('hidden');
-                showToast(`Targeting coordinate lock: ${city.name}`);
-                world.controls().autoRotate = false;
-                world.pointOfView({ lat: city.lat, lng: city.lng, altitude: 0.8 }, 2000);
-            });
-            destList.appendChild(btn);
-        });
-
-        // --- 5. CORE INTERACTIONS ---
-
-        // INITIALIZE Zoom
-        document.getElementById('btn-initialize').addEventListener('click', () => {
-            showToast("Verifying Edge Connection... Targeting Bengaluru HQ...");
-            world.controls().autoRotate = false;
-            world.pointOfView({ lat: 12.9716, lng: 77.5946, altitude: 0.8 }, 2500);
-        });
-
-        // EXPLORE MAP Hide UI
-        const mainUI = document.getElementById('main-ui');
-        const heroText = document.getElementById('hero-text');
-        const apiWidget = document.getElementById('api-widget');
-        const btnReturn = document.getElementById('btn-return');
-
-        document.getElementById('btn-explore').addEventListener('click', () => {
-            heroText.style.opacity = '0';
-            setTimeout(() => { heroText.classList.add('hidden'); btnReturn.classList.remove('hidden'); }, 500);
-            showToast("Free Exploration Mode Activated. Control disabled.");
-            world.controls().autoRotate = true;
-            world.controls().enableZoom = true;
-        });
-
-        btnReturn.addEventListener('click', () => {
-            heroText.classList.remove('hidden');
-            btnReturn.classList.add('hidden');
-            setTimeout(() => { heroText.style.opacity = '1'; }, 50);
-            world.controls().enableZoom = false;
-        });
-
-        // --- 6. CLOUD API & FLIGHT SIMULATION ---
-        let currentBackendData = null;
-
-        document.getElementById('live-demo-btn').addEventListener('click', async () => {
-            const output = document.getElementById('demo-output');
-            output.innerHTML = "Querying Edge Network on Render cloud...";
-            const simBtn = document.getElementById('btn-simulate-flight');
-            
-            try {
-                const response = await fetch('https://wanderlust-backend-0m49.onrender.com/api/destinations');
-                currentBackendData = await response.json();
-                
-                output.innerHTML = `
-                    <span style="color: #00ffea; font-weight: bold;">✅ Secure Connection Established</span><br>
-                    Authenticated to Render API. Global Hubs sync complete.<br><br>
-                    <b style="color: white;">Loaded Destinations:</b> 
-                    <span style="color: #ccc;">${currentBackendData[0].name}, ${currentBackendData[1].name}, ${currentBackendData[2].name}</span>
-                `;
-                
-                simBtn.classList.remove('hidden'); 
-                showToast("Render cloud data successfully authenticated.");
-            } catch (error) {
-                output.innerHTML = "<span style='color: #ff4444;'>❌ Cloud authentication failed. Verify Render service status.</span>";
-                console.error(error);
-            }
-        });
-
-        const flightTelemetry = document.getElementById('flight-telemetry-display');
-        const simBtn = document.getElementById('btn-simulate-flight');
-        const outputDisplay = document.getElementById('demo-output');
-
-        simBtn.addEventListener('click', () => {
-            if (!currentBackendData) return;
-            const target = currentBackendData[1]; // Tokyo
-            
-            simBtn.classList.add('hidden');
-            outputDisplay.classList.add('hidden');
-            flightTelemetry.classList.remove('hidden');
-            document.getElementById('telemetry-target').innerText = target.name;
-            
-            world.controls().autoRotate = false;
-            world.pointOfView({ lat: 12.9716, lng: 77.5946, altitude: 1.0 }, 1000);
-            
-            showToast(`Simulating encrypted flight path: Bengaluru ➜ ${target.name}`);
-
-            let progress = 0;
-            const duration = 8000;
-            const interval = 100;
-            const steps = duration / interval;
-            
-            const rocketPath = [{ lat: 12.9716, lng: 77.5946, name: 'AI Rocket' }];
-            world.pointsData(rocketPath).pointColor(() => '#ff00aa').pointAltitude(0.01).pointRadius(0.15);
-
-            const simTimer = setInterval(() => {
-                progress += (1 / steps);
-                
-                const currentPhase = progress < 0.1 ? 'Climb' : progress > 0.9 ? 'Descent' : 'Cruise';
-                const currentAlt = progress < 0.1 ? (progress * 10 * 35000).toFixed(0) : progress > 0.9 ? ((1-progress)*10*35000).toFixed(0) : "35000";
-                const currentSpeed = currentPhase === 'Cruise' ? "950" : (currentPhase === 'Climb' ? "550" : "450");
-                
-                document.getElementById('telemetry-progress').style.width = (progress * 100) + "%";
-                document.getElementById('telemetry-phase').innerText = currentPhase;
-                document.getElementById('telemetry-alt').innerText = currentAlt;
-                document.getElementById('telemetry-speed').innerText = currentSpeed;
-
-                const targetPoint = cities.find(c => c.name.includes(target.name));
-                if (targetPoint) {
-                    const currentLat = 12.9716 + (targetPoint.lat - 12.9716) * progress;
-                    const currentLng = 77.5946 + (targetPoint.lng - 77.5946) * progress;
-                    rocketPath[0].lat = currentLat;
-                    rocketPath[0].lng = currentLng;
-                    world.pointsData(rocketPath);
-                }
-
-                if (progress >= 1) {
-                    clearInterval(simTimer);
-                    document.getElementById('telemetry-phase').innerText = "Arrived";
-                    document.getElementById('telemetry-alt').innerText = "0";
-                    document.getElementById('telemetry-speed').innerText = "0";
-                    showToast(`Arrival Verified at ${target.name}. Connection secure.`);
-                    
-                    setTimeout(() => {
-                        if (targetPoint) world.pointOfView({ lat: targetPoint.lat, lng: targetPoint.lng, altitude: 0.8 }, 2000);
-                        setTimeout(() => {
-                             world.pointsData([]); 
-                             flightTelemetry.classList.add('hidden');
-                             outputDisplay.classList.remove('hidden');
-                             simBtn.classList.remove('hidden');
-                             world.controls().autoRotate = true;
-                        }, 5000);
-                    }, 1000);
-                }
-            }, interval);
-        });
-    </script>
-</body>
-</html>
+            <div class="glass-panel px-6 py-3 rounded-full text-xs font-mono text-gray-400 flex gap
